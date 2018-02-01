@@ -16,10 +16,17 @@ class Header extends Component{
         this.state = {
             showCart: false,
             cart: this.props.cartItems,
-            mobileSearch: false,
-            coins: this.props.totalCoins
+            mobileSearch: false
         };
+        // this.updateState = this.updateState.bind(this);
     }
+    //
+    // updateState(e) {
+    //   this.setState({
+    //     coins : this.props.newPoints
+    //   })
+    //   console.log(this.state.coins);
+    // }
 
     handleCart(e){
         e.preventDefault();
@@ -63,10 +70,12 @@ class Header extends Component{
     componentWillUnmount() {
       document.removeEventListener('click', this.handleClickOutside.bind(this), true);
     }
-    render(){
+
+    render() {
+      //  let coins = this.state.coins;
         let cartItems;
         cartItems = this.state.cart.map(product =>{
-			       return(
+			       return (
 				<li className="cart-item" key={product.name}>
                     <img className="product-image" src={product.image} />
                     <div className="product-info">
@@ -81,27 +90,27 @@ class Header extends Component{
                 </li>
 			)
 		});
-        let view;
-        if(cartItems.length <= 0){
+      let view;
+      let difference = this.props.newPoints - this.props.total;
+      if(cartItems.length <= 0) {
 			view = <EmptyCart />
-		} else{
+		} else {
 			view = <CSSTransitionGroup transitionName="fadeIn" transitionEnterTimeout={500} transitionLeaveTimeout={300} component="ul" className="cart-items">{cartItems}</CSSTransitionGroup>
-		}
-      //let newCoins;
-      //newCoins = this.state.coins.map(totalCoins =>{
-        return(
-            <header>
+    }
+      return(
+      //<div key={totalCoins[ 'new Points' ]}>
+      //<div className="more-coins">
+
+
+              <header>
                 <div className="container">
                     <div className="brand">
                         <img className="logo" src={aerologo} height="45px" alt="Aerolab Logo"/>
                     </div>
 
-                    <div className="more-coins">
-                    <p><span>{this.state.coins}</span></p>
-                    <a className="big-coin" href="#" onClick={() => this.props.getCoins(1000)}><img src={coin} alt="Big Coin"/></a>
-
+                  <div><a className="big-coin" href="#" onClick={() => this.props.getCoins(1000)}><img src={coin} alt="Big Coin"/></a>
+                    <p><span>{difference}</span></p>
                   </div>
-
 
                     <div className="search">
                         <a className="mobile-search" href="#" onClick={this.handleMobileSearch.bind(this)}><img src="http://res.cloudinary.com/marianfrog/image/upload/e_blackwhite/v1516751236/search-green_bwsb2r.png" alt="search"/></a>
@@ -139,14 +148,13 @@ class Header extends Component{
                             </CartScrollBar>
                             <div className="action-block">
                                 <button type="button" className={this.state.cart.length > 0 ? " " : "disabled"}>Checkout?</button>
-                            </div>
                         </div>
+                      </div>
                     </div>
-                </div>
-            </header>
-
-        )
-    }
-}
+                  </div>
+                </header>
+            )
+          }
+        }
 
 export default Header;

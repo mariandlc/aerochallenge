@@ -20,12 +20,11 @@ class Products extends Component{
 		}
 		productsData = this.props.productsList.filter(searchingFor(term)).map(product =>{
 			return(
-						<Product key={product._id} id={product._id} name={product.name} cost={product.cost} category={product.category} image={product.img.url} imagehd={product.img.hdUrl} addToCart={this.props.addToCart} productQuantity={this.props.productQuantity} updateQuantity={this.props.updateQuantity} openModal={this.props.openModal}/>
+						<Product key={product._id} id={product._id} name={product.name} cost={product.cost} category={product.category} image={product.img.url} imagehd={product.img.hdUrl} addToCart={this.props.addToCart} productQuantity={this.props.productQuantity} updateQuantity={this.props.updateQuantity} newPoints={this.props.newPoints} total={this.props.total} enoughPoints={this.props.enoughPoints}
+ openModal={this.props.openModal}/>
 				)
 		}
 	);
-
-		// console.log(productsData.length)
 
 		// Empty and Loading States
 		let view;

@@ -14,12 +14,13 @@ class App extends Component {
 			cart: [],
 			totalItems: 0,
 			totalAmount: 0,
-			totalCoins: 1000,
+			newPoints: '',
 			term: '',
 			category: '',
 			cartBounce: false,
 			quantity : 1,
 			quickViewProduct: {},
+			enoughPoints: true,
 			modalActive: false
 		};
 		this.handleSearch = this.handleSearch.bind(this);
@@ -34,14 +35,14 @@ class App extends Component {
 		this.openModal = this.openModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
 		this.getCoins = this.getCoins.bind(this);
+		this.redeemProduct = this.redeemProduct.bind(this);
+		axios.defaults.headers.common['Authorization'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTIwODgwZmYzNWEzYjAwNzk2N2FkNzUiLCJpYXQiOjE1MTIwODE0MjN9.o_RlWIRNeiYWM751BGGvvL8lampVLAUBdn51W1hb900";
 	}
 
+// Funciones API
 
 	getData(){
-
-		axios.defaults.headers.common['Authorization'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTYzYWRjYWE2YmNiZjAwNThjYmUyZDQiLCJpYXQiOjE1MTY0ODE5OTR9.-WpPc19Vvz_JIUXHgsQmahP-aURZrIkij_V6TPVL8Bg";
 		const productsUrl="https://aerolab-challenge.now.sh/products";
-
 		axios.get(productsUrl)
 		.then(response => {
 			this.setState({
@@ -51,26 +52,38 @@ class App extends Component {
 	}
 
 	getCoins(amount){
+			const pointsUrl="https://aerolab-challenge.now.sh/user/points";
+			axios.post(pointsUrl, {amount})
+			.then(response => {
+				this.setState({
+					newPoints : response.data['New Points']
+				})
+				console.log(this.state.newPoints);
+			})
+		}
 
-	axios.defaults.headers.common['Authorization'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTYzYWRjYWE2YmNiZjAwNThjYmUyZDQiLCJpYXQiOjE1MTY0ODE5OTR9.-WpPc19Vvz_JIUXHgsQmahP-aURZrIkij_V6TPVL8Bg";
-	const pointsUrl="https://aerolab-challenge.now.sh/user/points";
-
-		axios.post(pointsUrl, {amount})
+	getInfo(){
+		const infoUrl="https://aerolab-challenge.now.sh/user/me";
+		axios.get(infoUrl)
 		.then(response => {
 			this.setState({
-				totalCoins : response.data
+				newPoints : response.data.points
 			})
-			console.log(response.data);
 		})
 	}
 
-
-
+	redeemProduct(productId){
+		const redeemUrl="https://aerolab-challenge.now.sh/redeem";
+		axios.post(productId)
+		.then(response => {
+			console.log(response.data.message)
+		})
+	}
 
 	componentWillMount(){
 		this.getData();
+		this.getInfo();
 	}
-
 
 	// Search by Keyword
 	handleSearch(event){
@@ -85,11 +98,22 @@ class App extends Component {
 		this.setState({category: event.target.value});
 		console.log(this.state.category);
 	}
+
 	// Add to Cart
 	handleAddToCart(selectedProducts){
+		let selectedItem = this.state.products.id
 		let cartItem = this.state.cart;
 		let productID = selectedProducts.id;
 		let productQty = selectedProducts.quantity;
+		let total = this.state.totalAmount;
+		//console.log((this.state.newPoints - this.state.totalAmount) - (selectedProducts.quantity * selectedProducts.cost));
+		let result = ((this.state.newPoints - total) - (productQty * selectedProducts.cost));
+
+		if (result >= 0) {
+			this.setState({
+				enoughPoints: true
+			})
+
 		if(this.checkProduct(productID)){
 			let index = cartItem.findIndex((x => x.id == productID));
 			cartItem[index].quantity = Number(cartItem[index].quantity) + Number(productQty);
@@ -108,12 +132,18 @@ class App extends Component {
 				cartBounce:false,
 				quantity: 1
 			});
-			console.log(this.state.quantity);
-			console.log(this.state.cart);
     }.bind(this),1000);
 		this.sumTotalItems(this.state.cart);
 		this.sumTotalAmount(this.state.cart);
+
+} else {
+	this.setState({
+		enoughPoints: false
+	})
 	}
+}
+
+
 	handleRemoveProduct(id, e){
 		let cart = this.state.cart;
 		let index = cart.findIndex((x => x.id == id));
@@ -178,7 +208,7 @@ class App extends Component {
 					total={this.state.totalAmount}
 					totalItems={this.state.totalItems}
 					cartItems={this.state.cart}
-					totalCoins={this.state.totalCoins}
+					newPoints={this.state.newPoints}
 					getCoins={this.getCoins}
 					removeProduct={this.handleRemoveProduct}
 					handleSearch={this.handleSearch}
@@ -192,9 +222,13 @@ class App extends Component {
 					productsList={this.state.products}
 					searchTerm={this.state.term}
 					addToCart={this.handleAddToCart}
+					total={this.state.totalAmount}
+					newPoints={this.state.newPoints}
+					redeemProduct={this.redeemProduct}
 					productQuantity={this.state.quantity}
 					updateQuantity={this.updateQuantity}
 					openModal={this.openModal}
+					enoughPoints={this.state.enoughPoints}
 				/>
 				<Footer />
 				<QuickView product={this.state.quickViewProduct} openModal={this.state.modalActive} closeModal={this.closeModal} />
