@@ -30,6 +30,7 @@ class Product extends Component{
 			)
 
 			if (this.props.enoughPoints) {
+				console.log(this.props.enoughPoints)
 				this.setState({
             buttonLabel: "OK!"
         }, function(){
@@ -38,7 +39,7 @@ class Product extends Component{
                     buttonLabel: "CANJEAR!",
                     selectedProduct: {}
                 });
-            }, 1000);
+            }, 5000);
         });
 			}
 

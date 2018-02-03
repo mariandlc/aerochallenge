@@ -334,7 +334,7 @@ header {
       color: #999;
       font-weight: 700; }
       .cart-item .product-info .product-price:before {
-        content: "Monedas: "; }
+        content: ""; }
   .cart-item .product-total {
     margin-left: 16px; }
     .cart-item .product-total .quantity {
@@ -346,7 +346,7 @@ header {
       font-weight: 700;
       text-align: right; }
       .cart-item .product-total .amount:before {
-        content: "Monedas: "; }
+        content: ""; }
   .cart-item .product-remove {
     margin-left: 24px;
     height: 24px;
@@ -672,7 +672,7 @@ footer {
     font-size: 24px;
     float: right; }
     .quick-view-details .product-price:before {
-      content: "Monedas: "; }
+      content: ""; }
 
 .quick-view-image img {
   width: 100%;

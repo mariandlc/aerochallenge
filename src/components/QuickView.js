@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {findDOMNode} from 'react-dom';
+import coin from '../assets/icons/coin.svg'
+
 
 class QuickView extends Component{
 	constructor(props){
@@ -33,7 +35,8 @@ class QuickView extends Component{
             <div className="quick-view-image"><img src={this.props.product.imagehd} alt={this.props.product.name}/></div>
             <div className="quick-view-details">
               <span className="product-name">{this.props.product.name}</span>
-              <span className="product-price">{this.props.product.cost}</span>
+							<span className="product-price">{this.props.product.cost}</span>
+							<img className="product-price" src={coin} alt="Monedas" />
             </div>
           </div>
         </div>

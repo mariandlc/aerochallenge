@@ -21,7 +21,7 @@ class App extends Component {
 			quantity : 1,
 			quickViewProduct: {},
 			enoughPoints: true,
-			modalActive: false
+			modalActive: false,
 		};
 		this.handleSearch = this.handleSearch.bind(this);
 		this.handleMobileSearch = this.handleMobileSearch.bind(this);
@@ -37,6 +37,7 @@ class App extends Component {
 		this.getCoins = this.getCoins.bind(this);
 		this.redeemProduct = this.redeemProduct.bind(this);
 		axios.defaults.headers.common['Authorization'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTIwODgwZmYzNWEzYjAwNzk2N2FkNzUiLCJpYXQiOjE1MTIwODE0MjN9.o_RlWIRNeiYWM751BGGvvL8lampVLAUBdn51W1hb900";
+		axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 	}
 
 // Funciones API
@@ -104,10 +105,11 @@ class App extends Component {
 		let selectedItem = this.state.products.id
 		let cartItem = this.state.cart;
 		let productID = selectedProducts.id;
+		let productCost = selectedProducts.cost;
 		let productQty = selectedProducts.quantity;
 		let total = this.state.totalAmount;
-		//console.log((this.state.newPoints - this.state.totalAmount) - (selectedProducts.quantity * selectedProducts.cost));
-		let result = ((this.state.newPoints - total) - (productQty * selectedProducts.cost));
+		console.log((this.state.newPoints - this.state.totalAmount) - (selectedProducts.quantity * selectedProducts.cost));
+		let result = ((this.state.newPoints - total) - (productQty * productCost));
 
 		if (result >= 0) {
 			this.setState({
@@ -119,7 +121,7 @@ class App extends Component {
 			cartItem[index].quantity = Number(cartItem[index].quantity) + Number(productQty);
 			this.setState({
 				cart: cartItem
-			})
+						})
 		} else {
 			cartItem.push(selectedProducts);
 		}
@@ -139,10 +141,9 @@ class App extends Component {
 } else {
 	this.setState({
 		enoughPoints: false
-	})
+		})
 	}
 }
-
 
 	handleRemoveProduct(id, e){
 		let cart = this.state.cart;
@@ -154,6 +155,7 @@ class App extends Component {
 		this.sumTotalItems(this.state.cart);
 		this.sumTotalAmount(this.state.cart);
 		e.preventDefault();
+
 	}
 	checkProduct(productID){
 		let cart = this.state.cart;
@@ -161,6 +163,7 @@ class App extends Component {
 			return item.id === productID;
 		});
 	}
+
 	sumTotalItems(){
         let total = 0;
         let cart = this.state.cart;
@@ -169,6 +172,7 @@ class App extends Component {
 			totalItems: total
 		})
     }
+
 	sumTotalAmount(){
         let total = 0;
         let cart = this.state.cart;

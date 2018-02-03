@@ -14,9 +14,7 @@ class CartScrollBar extends Component{
   }
   handleScroll(event) {
     const positions = this.refs.scrollbars.getValues();
-    //When the bottom is reached and we're scrolling down, prevent scrolling of the window
     if (positions.top >= 1){
-      console.log("Reached scroll end!");
       event.stopPropagation();
     }
   }

@@ -80,11 +80,12 @@ class Header extends Component{
                     <img className="product-image" src={product.image} />
                     <div className="product-info">
                         <p className="product-name">{product.name}</p>
-                        <p className="product-price">{product.cost}</p>
+                        <p className="product-price"><img className="product-coin" src={coin} alt="Monedas" />{product.cost}</p>
                     </div>
                     <div className="product-total">
                         <p className="quantity">{product.quantity} {product.quantity > 1 ?"Items." : "Item." } </p>
-                        <p className="amount">{product.quantity * product.cost}</p>
+                        <p className="amount"><img className="product-coin" src={coin} alt="Monedas" />{product.quantity * product.cost}                        
+                        </p>
                     </div>
                     <a className="product-remove" href="#" onClick={this.props.removeProduct.bind(this, product.id)}>×</a>
                 </li>
