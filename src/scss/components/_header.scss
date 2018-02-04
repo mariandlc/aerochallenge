@@ -281,6 +281,7 @@ header{
         .product-price{
             color: $gray-light;
             font-weight: 700;
+            font-size: 18px;
             &:before{
                 content: ""
             }
@@ -296,6 +297,7 @@ header{
         .amount{
             color: $gray-dark;
             font-weight: 700;
+            font-size: 18px;
             text-align: right;
             &:before{
                 content: ""
@@ -318,6 +320,16 @@ header{
     &:hover{
         background: $green-light-bg;
     }
+}
+
+.big-coin{
+  color: $primary-orange;
+  font-weight: bolder;
+  right: 4px;
+}
+
+.product-coin{
+  right: 0px;
 }
 
 @keyframes tada {

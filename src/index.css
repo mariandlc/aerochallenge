@@ -6,7 +6,7 @@ ol {
   padding: 0; }
 
 body {
-  font-family: Roboto;
+  font-family: Arimo;
   font-size: 16px;
   color: #333;
   background: #f5f5f5; }
@@ -332,7 +332,8 @@ header {
       font-size: 14px; }
     .cart-item .product-info .product-price {
       color: #999;
-      font-weight: 700; }
+      font-weight: 700;
+      font-size: 18px; }
       .cart-item .product-info .product-price:before {
         content: ""; }
   .cart-item .product-total {
@@ -344,6 +345,7 @@ header {
     .cart-item .product-total .amount {
       color: #333;
       font-weight: 700;
+      font-size: 18px;
       text-align: right; }
       .cart-item .product-total .amount:before {
         content: ""; }
@@ -359,6 +361,14 @@ header {
       color: #e23d3d; }
   .cart-item:hover {
     background: rgba(147, 220, 156, 0.15); }
+
+.big-coin {
+  color: #ff6633;
+  font-weight: bolder;
+  right: 4px; }
+
+.product-coin {
+  right: 0px; }
 
 @keyframes tada {
   from {

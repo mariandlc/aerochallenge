@@ -18,15 +18,8 @@ class Header extends Component{
             cart: this.props.cartItems,
             mobileSearch: false
         };
-        // this.updateState = this.updateState.bind(this);
     }
-    //
-    // updateState(e) {
-    //   this.setState({
-    //     coins : this.props.newPoints
-    //   })
-    //   console.log(this.state.coins);
-    // }
+
 
     handleCart(e){
         e.preventDefault();
@@ -72,7 +65,6 @@ class Header extends Component{
     }
 
     render() {
-      //  let coins = this.state.coins;
         let cartItems;
         cartItems = this.state.cart.map(product =>{
 			       return (
@@ -80,11 +72,11 @@ class Header extends Component{
                     <img className="product-image" src={product.image} />
                     <div className="product-info">
                         <p className="product-name">{product.name}</p>
-                        <p className="product-price"><img className="product-coin" src={coin} alt="Monedas" />{product.cost}</p>
+                        <p className="product-price"><img className="product-coin" src={coin} height="16px" alt="Monedas" />{product.cost}</p>
                     </div>
                     <div className="product-total">
                         <p className="quantity">{product.quantity} {product.quantity > 1 ?"Items." : "Item." } </p>
-                        <p className="amount"><img className="product-coin" src={coin} alt="Monedas" />{product.quantity * product.cost}                        
+                        <p className="amount"><img className="product-coin" src={coin} height="16px" alt="Monedas" />{product.quantity * product.cost}
                         </p>
                     </div>
                     <a className="product-remove" href="#" onClick={this.props.removeProduct.bind(this, product.id)}>×</a>
@@ -99,28 +91,41 @@ class Header extends Component{
 			view = <CSSTransitionGroup transitionName="fadeIn" transitionEnterTimeout={500} transitionLeaveTimeout={300} component="ul" className="cart-items">{cartItems}</CSSTransitionGroup>
     }
       return(
-      //<div key={totalCoins[ 'new Points' ]}>
-      //<div className="more-coins">
-
-
               <header>
                 <div className="container">
                     <div className="brand">
                         <img className="logo" src={aerologo} height="45px" alt="Aerolab Logo"/>
                     </div>
 
-                  <div><a className="big-coin" href="#" onClick={() => this.props.getCoins(1000)}><img src={coin} alt="Big Coin"/></a>
-                    <p><span>{difference}</span></p>
+                  <div><a href="#" onClick={() => this.props.getCoins(1000)}><img src={coin} alt="Big Coin"/></a>
+                  <p className="big-coin"><span>{difference}</span></p>
                   </div>
 
-                    <div className="search">
-                        <a className="mobile-search" href="#" onClick={this.handleMobileSearch.bind(this)}><img src="http://res.cloudinary.com/marianfrog/image/upload/e_blackwhite/v1516751236/search-green_bwsb2r.png" alt="search"/></a>
-                        <form action="#" method="get" className={this.state.mobileSearch ? "search-form active" : "search-form"}>
-                            <a className="back-button" href="#" onClick={this.handleSearchNav.bind(this)}><img src={back} alt="back"/></a>
-                            <input type="search" ref="searchBox" placeholder="Hacé tu búsqueda..." className="search-keyword" onChange={this.props.handleSearch}/>
-                            <button className="search-button" type="submit" onClick={this.handleSubmit.bind(this)}></button>
-                        </form>
-                    </div>
+                  {/* <div className="cart-info">
+
+                <table>
+                  <tbody>
+                  <tr>
+                    <tr>
+                      <td>+ Precio</td>
+                    </tr>
+                    <tr>
+                      <td>- Precio</td>
+                    </tr>
+                  </tr>
+                </tbody>
+                </table>
+
+              </div> */}
+
+                      <div className="search">
+                          <a className="mobile-search" href="#" onClick={this.handleMobileSearch.bind(this)}><img src="http://res.cloudinary.com/marianfrog/image/upload/e_blackwhite/v1516751236/search-green_bwsb2r.png" alt="search"/></a>
+                          <form action="#" method="get" className={this.state.mobileSearch ? "search-form active" : "search-form"}>
+                              <a className="back-button" href="#" onClick={this.handleSearchNav.bind(this)}><img src={back} alt="back"/></a>
+                              <input type="search" ref="searchBox" placeholder="Hacé tu búsqueda..." className="search-keyword" onChange={this.props.handleSearch}/>
+                              <button className="search-button" type="submit" onClick={this.handleSubmit.bind(this)}></button>
+                          </form>
+                      </div>
 
                     <div className="cart">
                         <div className="cart-info">
@@ -136,6 +141,7 @@ class Header extends Component{
                                         <td>:</td>
                                         <td><strong>{this.props.total}</strong></td>
                                     </tr>
+
                                 </tbody>
                             </table>
                         </div>

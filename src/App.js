@@ -36,6 +36,7 @@ class App extends Component {
 		this.closeModal = this.closeModal.bind(this);
 		this.getCoins = this.getCoins.bind(this);
 		this.redeemProduct = this.redeemProduct.bind(this);
+		
 		axios.defaults.headers.common['Authorization'] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTIwODgwZmYzNWEzYjAwNzk2N2FkNzUiLCJpYXQiOjE1MTIwODE0MjN9.o_RlWIRNeiYWM751BGGvvL8lampVLAUBdn51W1hb900";
 		axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 	}

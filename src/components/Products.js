@@ -8,6 +8,9 @@ class Products extends Component{
 	constructor(){
 		super();
 	}
+
+	// Mapping
+
   	render(){
     	let productsData;
     	let term = this.props.searchTerm;

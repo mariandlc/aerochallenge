@@ -32,7 +32,7 @@ class Product extends Component{
 			if (this.props.enoughPoints) {
 				console.log(this.props.enoughPoints)
 				this.setState({
-            buttonLabel: "OK!"
+            buttonLabel: "PROCESANDO..."
         }, function(){
             setTimeout(() => {
                 this.setState({
@@ -78,12 +78,7 @@ class Product extends Component{
         let cost = this.props.cost;
         let id = this.props.id;
         let quantity = this.props.productQuantity;
-			//if ((this.props.addToCart) !== false) {
-			// 	if (this.addToCart) {
-			// 	var button = <button type="button" onClick={this.addToCart.bind(this, image, name, cost, id, quantity)}>{this.state.buttonLabel}</button>
-			// } else {
-			// 	var button = <button type="button" onClick={this.outOfPoints.bind(this)}>{this.state.buttonLabel}</button>
-			// 	}
+
         return(
             <div className="product">
                 <div className="product-image">
@@ -93,7 +88,6 @@ class Product extends Component{
                 <p className="product-price"><img className="product-coin" src={coin} alt="Monedas" />{cost}</p>
                 <Counter productQuantity={quantity} updateQuantity={this.props.updateQuantity} resetQuantity={this.resetQuantity}/>
                 <div className="product-action">
-									{/* {button} */}
                     <button type="button" onClick={this.addToCart.bind(this, image, name, cost, id, quantity)}>{this.state.buttonLabel}</button>
                 </div>
             </div>
