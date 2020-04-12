@@ -116,10 +116,10 @@ header {
     opacity: 1; } }
 
 .brand .logo {
-  width: 123px; }
+  width: 50px; }
   @media (max-width: 480px) {
     .brand .logo {
-      width: 102px;
+      width: 50px;
       margin: 2px 0; } }
 
 .search {

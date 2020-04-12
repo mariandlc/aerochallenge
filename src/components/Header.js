@@ -8,6 +8,7 @@ import buywhite from '../assets/icons/buy-white.svg'
 import aerologo from '../assets/aerolab-logo.svg'
 import coin from '../assets/icons/coin.svg'
 import back from '../assets/icons/arrow-left.svg'
+import cart from '../assets/Cart2.jpg'
 
 
 class Header extends Component{
@@ -94,7 +95,7 @@ class Header extends Component{
               <header>
                 <div className="container">
                     <div className="brand">
-                        <img className="logo" src={aerologo} height="45px" alt="Aerolab Logo"/>
+                        <img className="logo" src={cart} width="70px" height="50px"  alt="Aerolab Logo"/>
                     </div>
 
                   <div><a href="#" onClick={() => this.props.getCoins(1000)}><img src={coin} alt="Big Coin"/></a>
